@@ -27,7 +27,6 @@ def vgg16_adj(model_type='pooling',
     model.add(Conv2D(512, kernel_size=(3,3), padding='same', activation='relu'))
     model.add(Conv2D(512, kernel_size=(3,3), padding='same', activation='relu'))
     model.add(MaxPooling2D(pool_size=(2,2)))
-    feature_vec = model
     if model_type == 'flatten':
         model.add(Flatten())
         model.add(Dense(4096, activation='relu'))
@@ -35,7 +34,7 @@ def vgg16_adj(model_type='pooling',
         model.add(Dense(final_dense, activation=final_activation))
     else:
         model.add(GlobalAveragePooling2D())
-        model.add(Dense(512, activation='relu'))
+        model.add(Dense(512, activation='relu', name='after_gap'))
         model.add(Dense(final_dense, activation=final_activation))
     model.summary()
 
@@ -44,17 +43,17 @@ def vgg16_adj(model_type='pooling',
                  optimizer='adam',
                  metrics=['accuracy'])
 
-    return model, feature_vec
+    return model
 
 if __name__ == '__main__':
 
     ##### USE CASE SAMPLE #####
 
     # 모델 불러오기
-    model, _ = vgg16_adj(model_type = 'pooling',       # pooling 또는 flatten 형식 설정
-                         loss='binary_crossentropy',   # keras 기준, 필요한 loss function 설정
-                         final_dense=7,                # 최종 결과 Dense 설정
-                         final_activation='sigmoid')   # 마지막 Activation 설정
+    model = vgg16_adj(model_type = 'pooling',       # pooling 또는 flatten 형식 설정
+                      loss='binary_crossentropy',   # keras 기준, 필요한 loss function 설정
+                      final_dense=7,                # 최종 결과 Dense 설정
+                      final_activation='sigmoid')   # 마지막 Activation 설정
 
     # 제너레이터 설정
     early_stopping = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=2000)
