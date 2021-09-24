@@ -7,7 +7,7 @@ def vgg16_adj(model_type='pooling',
               loss='binary_crossentropy',
               final_dense=2,
               final_activation='sigmoid'):
-    model = Sequential()
+    model = Sequential(name="VGG16_ADJ")
     model.add(Conv2D(64, kernel_size=(3,3), padding='same', input_shape=(224,224,3), activation='relu'))
     model.add(Conv2D(64, kernel_size=(3,3), padding='same', activation='relu'))
     model.add(MaxPooling2D(pool_size=(2,2)))
