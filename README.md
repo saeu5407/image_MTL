@@ -2,6 +2,8 @@
 
 > 케라스를 활용해 멀티태스크 러닝을 구현해보고자 하는 repo입니다.
 
+---
+
 ### 구현 순서
 
 구현하는 데 앞서 image classification 모델을 각각 `Multiclass`, `Multilabel`로 개발해보며 각각의 차이를 익혀보고,
