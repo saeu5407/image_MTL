@@ -6,10 +6,11 @@ from keras.callbacks import ModelCheckpoint, EarlyStopping
 def vgg16_adj(model_type='pooling',
               loss='binary_crossentropy',
               final_dense=2,
-              final_activation='sigmoid'):
+              final_activation='sigmoid',
+              input_shape=(224,224,3)):
 
     model = Sequential(name="VGG16_ADJ")
-    model.add(Conv2D(64, kernel_size=(3,3), padding='same', input_shape=(224,224,3), activation='relu'))
+    model.add(Conv2D(64, kernel_size=(3,3), padding='same', input_shape=input_shape, activation='relu'))
     model.add(Conv2D(64, kernel_size=(3,3), padding='same', activation='relu'))
     model.add(MaxPooling2D(pool_size=(2,2)))
     model.add(Conv2D(128, kernel_size=(3,3), padding='same', activation='relu'))
@@ -53,7 +54,8 @@ if __name__ == '__main__':
     model = vgg16_adj(model_type = 'pooling',       # pooling 또는 flatten 형식 설정
                       loss='binary_crossentropy',   # keras 기준, 필요한 loss function 설정
                       final_dense=7,                # 최종 결과 Dense 설정
-                      final_activation='sigmoid')   # 마지막 Activation 설정
+                      final_activation='sigmoid',   # 마지막 Activation 설정
+                      input_shape=(224,224,3))      # 이미지 input shape 설정(VGG16 기본은 224,224,3)
 
     # 제너레이터 설정
     early_stopping = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=2000)
