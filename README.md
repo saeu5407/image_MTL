@@ -1,5 +1,7 @@
 # 멀티 태스크 러닝(Multi-task Learning)
 
+[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2Fsaeu5407&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
+
 > 케라스를 활용해 멀티태스크 러닝을 구현해보고자 하는 repo입니다.
 
 ---
